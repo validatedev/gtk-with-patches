@@ -1,0 +1,29 @@
+diff --git a/gtk/gtkscrolledwindow.c b/gtk/gtkscrolledwindow.c
+index 0f4193b..00218c2 100644
+--- a/gtk/gtkscrolledwindow.c
++++ b/gtk/gtkscrolledwindow.c
+@@ -1289,14 +1289,13 @@ get_scroll_unit (GtkScrolledWindow *sw,
+                  GtkOrientation     orientation)
+ {
+   gdouble scroll_unit;
+-
+ #ifndef GDK_WINDOWING_QUARTZ
+   GtkScrolledWindowPrivate *priv = sw->priv;
+   GtkRange *scrollbar;
+   GtkAdjustment *adj;
+   gdouble page_size;
+   gdouble pow_unit;
+-
++  
+   if (orientation == GTK_ORIENTATION_HORIZONTAL)
+     scrollbar = GTK_RANGE (priv->hscrollbar);
+   else
+@@ -1310,7 +1309,7 @@ get_scroll_unit (GtkScrolledWindow *sw,
+ 
+   /* see comment in _gtk_range_get_wheel_delta() */
+   pow_unit = pow (page_size, 2.0 / 3.0);
+-  scroll_unit = MIN (pow_unit, page_size / 2.0);
++  scroll_unit = MIN (pow_unit, page_size / 2.0) * 0.325;
+ #else
+   scroll_unit = 1;
+ #endif
